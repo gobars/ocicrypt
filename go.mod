@@ -1,4 +1,4 @@
-module github.com/containers/ocicrypt
+module github.com/gobars/ocicrypt
 
 go 1.20
 

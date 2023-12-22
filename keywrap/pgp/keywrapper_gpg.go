@@ -28,8 +28,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/containers/ocicrypt/config"
-	"github.com/containers/ocicrypt/keywrap"
+	"github.com/gobars/ocicrypt/config"
+	"github.com/gobars/ocicrypt/keywrap"
 	"golang.org/x/crypto/openpgp"
 	"golang.org/x/crypto/openpgp/packet"
 )

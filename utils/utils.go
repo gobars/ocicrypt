@@ -25,8 +25,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/containers/ocicrypt/crypto/pkcs11"
 	"github.com/go-jose/go-jose/v3"
+	"github.com/gobars/ocicrypt/crypto/pkcs11"
 	"golang.org/x/crypto/openpgp"
 )
 

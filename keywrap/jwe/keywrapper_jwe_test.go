@@ -20,9 +20,9 @@ import (
 	"crypto/elliptic"
 	"testing"
 
-	"github.com/containers/ocicrypt/config"
-	"github.com/containers/ocicrypt/utils"
 	"github.com/go-jose/go-jose/v3"
+	"github.com/gobars/ocicrypt/config"
+	"github.com/gobars/ocicrypt/utils"
 )
 
 var oneEmpty []byte

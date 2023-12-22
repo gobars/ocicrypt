@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/containers/ocicrypt/crypto/pkcs11"
+	"github.com/gobars/ocicrypt/crypto/pkcs11"
 	"gopkg.in/yaml.v3"
 )
 

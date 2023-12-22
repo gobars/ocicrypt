@@ -27,7 +27,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/containers/ocicrypt/utils/softhsm"
+	"github.com/gobars/ocicrypt/utils/softhsm"
 )
 
 var (

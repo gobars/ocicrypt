@@ -22,11 +22,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/containers/ocicrypt/config"
-	keyproviderconfig "github.com/containers/ocicrypt/config/keyprovider-config"
-	"github.com/containers/ocicrypt/keywrap"
-	"github.com/containers/ocicrypt/utils"
-	keyproviderpb "github.com/containers/ocicrypt/utils/keyprovider"
+	"github.com/gobars/ocicrypt/config"
+	keyproviderconfig "github.com/gobars/ocicrypt/config/keyprovider-config"
+	"github.com/gobars/ocicrypt/keywrap"
+	"github.com/gobars/ocicrypt/utils"
+	keyproviderpb "github.com/gobars/ocicrypt/utils/keyprovider"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )

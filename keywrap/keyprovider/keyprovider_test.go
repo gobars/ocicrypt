@@ -29,9 +29,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/containers/ocicrypt/config"
-	keyprovider_config "github.com/containers/ocicrypt/config/keyprovider-config"
-	keyproviderpb "github.com/containers/ocicrypt/utils/keyprovider"
+	"github.com/gobars/ocicrypt/config"
+	keyprovider_config "github.com/gobars/ocicrypt/config/keyprovider-config"
+	keyproviderpb "github.com/gobars/ocicrypt/utils/keyprovider"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 )

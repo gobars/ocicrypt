@@ -20,8 +20,8 @@ import (
 	"crypto/x509"
 	"testing"
 
-	"github.com/containers/ocicrypt/config"
-	"github.com/containers/ocicrypt/utils"
+	"github.com/gobars/ocicrypt/config"
+	"github.com/gobars/ocicrypt/utils"
 )
 
 var oneEmpty []byte

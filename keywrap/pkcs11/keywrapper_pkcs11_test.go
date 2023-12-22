@@ -21,10 +21,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/containers/ocicrypt/config"
-	"github.com/containers/ocicrypt/crypto/pkcs11"
-	"github.com/containers/ocicrypt/utils"
-	"github.com/containers/ocicrypt/utils/softhsm"
+	"github.com/gobars/ocicrypt/config"
+	"github.com/gobars/ocicrypt/crypto/pkcs11"
+	"github.com/gobars/ocicrypt/utils"
+	"github.com/gobars/ocicrypt/utils/softhsm"
 )
 
 var (

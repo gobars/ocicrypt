@@ -17,7 +17,7 @@
 package keywrap
 
 import (
-	"github.com/containers/ocicrypt/config"
+	"github.com/gobars/ocicrypt/config"
 )
 
 // KeyWrapper is the interface used for wrapping keys using

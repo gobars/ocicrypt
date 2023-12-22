@@ -22,9 +22,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/containers/ocicrypt/config"
-	"github.com/containers/ocicrypt/keywrap"
-	"github.com/containers/ocicrypt/utils"
+	"github.com/gobars/ocicrypt/config"
+	"github.com/gobars/ocicrypt/keywrap"
+	"github.com/gobars/ocicrypt/utils"
 	"go.mozilla.org/pkcs7"
 )
 

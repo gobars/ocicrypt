@@ -27,7 +27,7 @@ import (
 	"hash"
 	"io"
 
-	"github.com/containers/ocicrypt/utils"
+	"github.com/gobars/ocicrypt/utils"
 )
 
 // AESCTRLayerBlockCipher implements the AES CTR stream cipher

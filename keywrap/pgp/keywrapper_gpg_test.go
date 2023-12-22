@@ -19,7 +19,7 @@ package pgp
 import (
 	"testing"
 
-	"github.com/containers/ocicrypt/config"
+	"github.com/gobars/ocicrypt/config"
 )
 
 var validGpgCcs = []*config.CryptoConfig{

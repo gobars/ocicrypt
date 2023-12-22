@@ -21,10 +21,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/containers/ocicrypt/config"
-	"github.com/containers/ocicrypt/keywrap"
-	"github.com/containers/ocicrypt/utils"
 	"github.com/go-jose/go-jose/v3"
+	"github.com/gobars/ocicrypt/config"
+	"github.com/gobars/ocicrypt/keywrap"
+	"github.com/gobars/ocicrypt/utils"
 )
 
 type jweKeyWrapper struct {
