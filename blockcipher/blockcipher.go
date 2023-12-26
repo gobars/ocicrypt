@@ -19,6 +19,7 @@ package blockcipher
 import (
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/blockcipher/sm4"
 	"io"
 
 	"github.com/opencontainers/go-digest"
@@ -30,6 +31,7 @@ type LayerCipherType string
 // TODO: Should be obtained from OCI spec once included
 const (
 	AES256CTR LayerCipherType = "AES_256_CTR_HMAC_SHA256"
+	SM4128CTR LayerCipherType = "SM4_128_CTR_HMAC_SM3"
 )
 
 // PrivateLayerBlockCipherOptions includes the information required to encrypt/decrypt
@@ -157,5 +159,9 @@ func NewLayerBlockCipherHandler() (*LayerBlockCipherHandler, error) {
 		return nil, fmt.Errorf("unable to set up Cipher AES-256-CTR: %w", err)
 	}
 
+	h.cipherMap[SM4128CTR], err = sm4.NewSM4CTRLayerBlockCipher(128)
+	if err != nil {
+		return nil, fmt.Errorf("unable to set up Cipher SM5-128-CTR: %w", err)
+	}
 	return &h, nil
 }
