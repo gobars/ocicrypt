@@ -18,11 +18,13 @@ package pgp
 
 import (
 	"bytes"
-	"crypto"
 	"crypto/rand"
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/crypto/openpgp"
+	"github.com/gobars/ocicrypt/crypto/openpgp/packet"
+	"github.com/gobars/ocicrypt/crypto/x509"
 	"io"
 	"net/mail"
 	"strconv"
@@ -30,8 +32,6 @@ import (
 
 	"github.com/gobars/ocicrypt/config"
 	"github.com/gobars/ocicrypt/keywrap"
-	"golang.org/x/crypto/openpgp"
-	"golang.org/x/crypto/openpgp/packet"
 )
 
 type gpgKeyWrapper struct {
@@ -46,7 +46,7 @@ var (
 	// GPGDefaultEncryptConfig is the default configuration for layer encryption/decryption
 	GPGDefaultEncryptConfig = &packet.Config{
 		Rand:              rand.Reader,
-		DefaultHash:       crypto.SHA256,
+		DefaultHash:       x509.SHA256,
 		DefaultCipher:     packet.CipherAES256,
 		CompressionConfig: &packet.CompressionConfig{Level: 0}, // No compression
 		RSABits:           2048,

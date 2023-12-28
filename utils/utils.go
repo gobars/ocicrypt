@@ -18,14 +18,14 @@ package utils
 
 import (
 	"bytes"
-	"crypto/x509"
 	"encoding/base64"
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/crypto/jose"
+	"github.com/gobars/ocicrypt/crypto/x509"
 	"strings"
 
-	"github.com/go-jose/go-jose/v3"
 	"github.com/gobars/ocicrypt/crypto/pkcs11"
 	"golang.org/x/crypto/openpgp"
 )
