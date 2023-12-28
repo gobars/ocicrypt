@@ -19,7 +19,6 @@ package blockcipher
 import (
 	"errors"
 	"fmt"
-	"github.com/gobars/ocicrypt/blockcipher/sm4"
 	"io"
 
 	"github.com/opencontainers/go-digest"
@@ -159,7 +158,6 @@ func NewLayerBlockCipherHandler() (*LayerBlockCipherHandler, error) {
 		return nil, fmt.Errorf("unable to set up Cipher AES-256-CTR: %w", err)
 	}
 
-	h.cipherMap[SM4128CTR], err = sm4.NewSM4CTRLayerBlockCipher(128)
 	if err != nil {
 		return nil, fmt.Errorf("unable to set up Cipher SM5-128-CTR: %w", err)
 	}

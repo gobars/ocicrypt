@@ -1,4 +1,4 @@
-package sm4
+package blockcipher
 
 import (
 	"crypto/cipher"
@@ -6,8 +6,8 @@ import (
 	"crypto/rand"
 	"errors"
 	"fmt"
-	"github.com/gobars/ocicrypt/blockcipher"
 	"github.com/gobars/ocicrypt/blockcipher/sm3"
+	"github.com/gobars/ocicrypt/blockcipher/sm4"
 	"github.com/gobars/ocicrypt/utils"
 	"hash"
 	"io"
@@ -30,7 +30,7 @@ type sm4ctrcryptor struct {
 }
 
 // NewAESCTRLayerBlockCipher returns a new SM4 SIV block cipher of 256 or 512 bits
-func NewSM4CTRLayerBlockCipher(bits int) (blockcipher.LayerBlockCipher, error) {
+func NewSM4CTRLayerBlockCipher(bits int) (LayerBlockCipher, error) {
 	if bits != 128 {
 		return nil, errors.New("SM4 CTR bit count not supported")
 	}
@@ -89,27 +89,27 @@ func (r *sm4ctrcryptor) Read(p []byte) (int, error) {
 }
 
 // init initializes an instance
-func (bc *SM4CTRLayerBlockCipher) init(encrypt bool, reader io.Reader, opts blockcipher.LayerBlockCipherOptions) (blockcipher.LayerBlockCipherOptions, error) {
+func (bc *SM4CTRLayerBlockCipher) init(encrypt bool, reader io.Reader, opts LayerBlockCipherOptions) (LayerBlockCipherOptions, error) {
 	var (
 		err error
 	)
 
 	key := opts.Private.SymmetricKey
 	if len(key) != bc.keylen {
-		return blockcipher.LayerBlockCipherOptions{}, fmt.Errorf("invalid key length of %d bytes; need %d bytes", len(key), bc.keylen)
+		return LayerBlockCipherOptions{}, fmt.Errorf("invalid key length of %d bytes; need %d bytes", len(key), bc.keylen)
 	}
 
 	nonce, ok := opts.GetOpt("nonce")
 	if !ok {
-		nonce = make([]byte, BlockSize)
+		nonce = make([]byte, sm4.BlockSize)
 		if _, err := io.ReadFull(rand.Reader, nonce); err != nil {
-			return blockcipher.LayerBlockCipherOptions{}, fmt.Errorf("unable to generate random nonce: %w", err)
+			return LayerBlockCipherOptions{}, fmt.Errorf("unable to generate random nonce: %w", err)
 		}
 	}
 
-	block, err := NewCipher(key)
+	block, err := sm4.NewCipher(key)
 	if err != nil {
-		return blockcipher.LayerBlockCipherOptions{}, fmt.Errorf("aes.NewCipher failed: %w", err)
+		return LayerBlockCipherOptions{}, fmt.Errorf("aes.NewCipher failed: %w", err)
 	}
 
 	bc.reader = reader
@@ -121,11 +121,11 @@ func (bc *SM4CTRLayerBlockCipher) init(encrypt bool, reader io.Reader, opts bloc
 	bc.doneEncrypting = false
 
 	if !encrypt && len(bc.expHmac) == 0 {
-		return blockcipher.LayerBlockCipherOptions{}, errors.New("HMAC is not provided for decryption process")
+		return LayerBlockCipherOptions{}, errors.New("HMAC is not provided for decryption process")
 	}
 
-	lbco := blockcipher.LayerBlockCipherOptions{
-		Private: blockcipher.PrivateLayerBlockCipherOptions{
+	lbco := LayerBlockCipherOptions{
+		Private: PrivateLayerBlockCipherOptions{
 			SymmetricKey: key,
 			CipherOptions: map[string][]byte{
 				"nonce": nonce,
@@ -146,15 +146,15 @@ func (bc *SM4CTRLayerBlockCipher) GenerateKey() ([]byte, error) {
 }
 
 // Encrypt takes in layer data and returns the ciphertext and relevant LayerBlockCipherOptions
-func (bc *SM4CTRLayerBlockCipher) Encrypt(plainDataReader io.Reader, opt blockcipher.LayerBlockCipherOptions) (io.Reader, blockcipher.Finalizer, error) {
+func (bc *SM4CTRLayerBlockCipher) Encrypt(plainDataReader io.Reader, opt LayerBlockCipherOptions) (io.Reader, Finalizer, error) {
 	lbco, err := bc.init(true, plainDataReader, opt)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	finalizer := func() (blockcipher.LayerBlockCipherOptions, error) {
+	finalizer := func() (LayerBlockCipherOptions, error) {
 		if !bc.doneEncrypting {
-			return blockcipher.LayerBlockCipherOptions{}, errors.New("Read()ing not complete, unable to finalize")
+			return LayerBlockCipherOptions{}, errors.New("Read()ing not complete, unable to finalize")
 		}
 		if lbco.Public.CipherOptions == nil {
 			lbco.Public.CipherOptions = map[string][]byte{}
@@ -166,10 +166,10 @@ func (bc *SM4CTRLayerBlockCipher) Encrypt(plainDataReader io.Reader, opt blockci
 }
 
 // Decrypt takes in layer ciphertext data and returns the plaintext and relevant LayerBlockCipherOptions
-func (bc *SM4CTRLayerBlockCipher) Decrypt(encDataReader io.Reader, opt blockcipher.LayerBlockCipherOptions) (io.Reader, blockcipher.LayerBlockCipherOptions, error) {
+func (bc *SM4CTRLayerBlockCipher) Decrypt(encDataReader io.Reader, opt LayerBlockCipherOptions) (io.Reader, LayerBlockCipherOptions, error) {
 	lbco, err := bc.init(false, encDataReader, opt)
 	if err != nil {
-		return nil, blockcipher.LayerBlockCipherOptions{}, err
+		return nil, LayerBlockCipherOptions{}, err
 	}
 
 	return utils.NewDelayedReader(&sm4ctrcryptor{bc}, 1024*10), lbco, nil

@@ -1,8 +1,7 @@
-package sm4
+package blockcipher
 
 import (
 	"bytes"
-	"github.com/gobars/ocicrypt/blockcipher"
 	"io"
 	"testing"
 )
@@ -28,8 +27,8 @@ func TestBlockCipherSm4CtrCreateInvalid(t *testing.T) {
 func TestBlockCipherSm4CtrEncryption(t *testing.T) {
 	var (
 		symKey = []byte("0123456789012345")
-		opt    = blockcipher.LayerBlockCipherOptions{
-			Private: blockcipher.PrivateLayerBlockCipherOptions{
+		opt    = LayerBlockCipherOptions{
+			Private: PrivateLayerBlockCipherOptions{
 				SymmetricKey: symKey,
 			},
 		}
@@ -85,8 +84,8 @@ func TestBlockCipherSm4CtrEncryption(t *testing.T) {
 func TestBlockCipherSm4CtrEncryptionInvalidKey(t *testing.T) {
 	var (
 		symKey = []byte("0123456789012345")
-		opt    = blockcipher.LayerBlockCipherOptions{
-			Private: blockcipher.PrivateLayerBlockCipherOptions{
+		opt    = LayerBlockCipherOptions{
+			Private: PrivateLayerBlockCipherOptions{
 				SymmetricKey: symKey,
 			},
 		}
@@ -142,8 +141,8 @@ func TestBlockCipherSm4CtrEncryptionInvalidKey(t *testing.T) {
 func TestBlockCipherSM4CtrEncryptionInvalidKeyLength(t *testing.T) {
 	var (
 		symKey = []byte("012345")
-		opt    = blockcipher.LayerBlockCipherOptions{
-			Private: blockcipher.PrivateLayerBlockCipherOptions{
+		opt    = LayerBlockCipherOptions{
+			Private: PrivateLayerBlockCipherOptions{
 				SymmetricKey: symKey,
 			},
 		}
@@ -165,8 +164,8 @@ func TestBlockCipherSM4CtrEncryptionInvalidKeyLength(t *testing.T) {
 func TestBlockCipherSM4CtrEncryptionInvalidHMAC(t *testing.T) {
 	var (
 		symKey = []byte("0123456789012345")
-		opt    = blockcipher.LayerBlockCipherOptions{
-			Private: blockcipher.PrivateLayerBlockCipherOptions{
+		opt    = LayerBlockCipherOptions{
+			Private: PrivateLayerBlockCipherOptions{
 				SymmetricKey: symKey,
 			},
 		}
