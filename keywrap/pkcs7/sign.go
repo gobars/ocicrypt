@@ -5,11 +5,11 @@ import (
 	"crypto"
 	"crypto/dsa"
 	"crypto/rand"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/crypto/x509"
 	"math/big"
 	"time"
 )

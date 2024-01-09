@@ -2,11 +2,11 @@ package pkcs7
 
 import (
 	"crypto/subtle"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/crypto/x509"
 	"time"
 )
 
