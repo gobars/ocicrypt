@@ -18,14 +18,12 @@ package pkcs7
 
 import (
 	"crypto"
-	"crypto/x509"
 	"errors"
 	"fmt"
-
 	"github.com/gobars/ocicrypt/config"
+	"github.com/gobars/ocicrypt/crypto/x509"
 	"github.com/gobars/ocicrypt/keywrap"
 	"github.com/gobars/ocicrypt/utils"
-	"go.mozilla.org/pkcs7"
 )
 
 type pkcs7KeyWrapper struct {
@@ -52,8 +50,8 @@ func (kw *pkcs7KeyWrapper) WrapKeys(ec *config.EncryptConfig, optsData []byte) (
 		return nil, nil
 	}
 
-	pkcs7.ContentEncryptionAlgorithm = pkcs7.EncryptionAlgorithmAES128GCM
-	return pkcs7.Encrypt(optsData, x509Certs)
+	ContentEncryptionAlgorithm = EncryptionAlgorithmAES128GCM
+	return Encrypt(optsData, x509Certs)
 }
 
 func collectX509s(x509s [][]byte) ([]*x509.Certificate, error) {
@@ -103,7 +101,7 @@ func (kw *pkcs7KeyWrapper) UnwrapKey(dc *config.DecryptConfig, pkcs7Packet []byt
 		return nil, errors.New("no x509 certificates found needed for PKCS7 decryption")
 	}
 
-	p7, err := pkcs7.Parse(pkcs7Packet)
+	p7, err := Parse(pkcs7Packet)
 	if err != nil {
 		return nil, fmt.Errorf("could not parse PKCS7 packet: %w", err)
 	}
