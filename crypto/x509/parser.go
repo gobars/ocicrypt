@@ -261,7 +261,7 @@ func parsePublicKey(keyData *publicKeyInfo) (any, error) {
 			return nil, errors.New("x509: failed to unmarshal elliptic curve point")
 		}
 
-		if oid.Equal(oidNamedCurveP256SM2) {
+		if (*namedCurveOID).Equal(oidNamedCurveP256SM2) {
 			return &sm2.PublicKey{
 				Curve: namedCurve,
 				X:     x,
