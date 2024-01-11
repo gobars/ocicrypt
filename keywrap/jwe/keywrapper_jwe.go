@@ -20,6 +20,7 @@ import (
 	"crypto/ecdsa"
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/crypto/sm2"
 
 	"github.com/go-jose/go-jose/v3"
 	"github.com/gobars/ocicrypt/config"
@@ -112,6 +113,8 @@ func (kw *jweKeyWrapper) GetRecipients(b64jwes string) ([]string, error) {
 	return []string{"[jwe]"}, nil
 }
 
+var ECDH_SM2_S128KW = jose.KeyAlgorithm("ECDH-SM2+S128KW") // ECDH-ES + AES key wrap (256)
+
 func addPubKeys(joseRecipients *[]jose.Recipient, pubKeys [][]byte) error {
 	if len(pubKeys) == 0 {
 		return nil
@@ -126,6 +129,8 @@ func addPubKeys(joseRecipients *[]jose.Recipient, pubKeys [][]byte) error {
 		switch key.(type) {
 		case *ecdsa.PublicKey:
 			alg = jose.ECDH_ES_A256KW
+		case *sm2.PublicKey:
+			alg = ECDH_SM2_S128KW
 		}
 
 		*joseRecipients = append(*joseRecipients, jose.Recipient{
