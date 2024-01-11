@@ -18,9 +18,9 @@ package jwe
 
 import (
 	"crypto/elliptic"
+	"github.com/gobars/ocicrypt/keywrap/jwe/jose"
 	"testing"
 
-	"github.com/go-jose/go-jose/v3"
 	"github.com/gobars/ocicrypt/config"
 	"github.com/gobars/ocicrypt/utils"
 )
