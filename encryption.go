@@ -118,7 +118,7 @@ func EncryptLayer(ec *config.EncryptConfig, encOrPlainLayerReader io.Reader, des
 	}
 
 	if !encrypted {
-		encLayerReader, bcFin, err = commonEncryptLayer(encOrPlainLayerReader, desc.Digest, blockcipher.AES256CTR)
+		encLayerReader, bcFin, err = commonEncryptLayer(encOrPlainLayerReader, desc.Digest, blockcipher.SM4128CTR)
 		if err != nil {
 			return nil, nil, err
 		}

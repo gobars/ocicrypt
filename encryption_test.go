@@ -22,7 +22,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/containers/ocicrypt/config"
+	"github.com/gobars/ocicrypt/config"
 	digest "github.com/opencontainers/go-digest"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 )

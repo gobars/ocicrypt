@@ -154,6 +154,8 @@ func NewLayerBlockCipherHandler() (*LayerBlockCipherHandler, error) {
 
 	var err error
 	h.cipherMap[AES256CTR], err = NewAESCTRLayerBlockCipher(256)
+	h.cipherMap[SM4128CTR], err = NewSM4CTRLayerBlockCipher(128)
+
 	if err != nil {
 		return nil, fmt.Errorf("unable to set up Cipher AES-256-CTR: %w", err)
 	}
