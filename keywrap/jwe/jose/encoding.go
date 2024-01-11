@@ -5,12 +5,11 @@ import (
 	"compress/flate"
 	"encoding/base64"
 	"encoding/binary"
+	"github.com/gobars/ocicrypt/keywrap/jwe/jose/json"
 	"io"
 	"math/big"
 	"strings"
 	"unicode"
-
-	"github.com/go-jose/go-jose/v3/json"
 )
 
 // Helper function to serialize known-good objects.

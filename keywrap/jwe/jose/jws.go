@@ -5,9 +5,8 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/keywrap/jwe/jose/json"
 	"strings"
-
-	"github.com/go-jose/go-jose/v3/json"
 )
 
 // rawJSONWebSignature represents a raw JWS JSON object. Used for parsing/serializing.

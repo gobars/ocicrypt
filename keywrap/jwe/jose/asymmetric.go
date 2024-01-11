@@ -15,10 +15,10 @@ import (
 	"github.com/gobars/ocicrypt/crypto/sm2"
 	"github.com/gobars/ocicrypt/crypto/x509"
 	"github.com/gobars/ocicrypt/keywrap/jwe/jose/cipher"
+	"github.com/gobars/ocicrypt/keywrap/jwe/jose/json"
 	"math/big"
 
 	josecipher "github.com/go-jose/go-jose/v3/cipher"
-	"github.com/go-jose/go-jose/v3/json"
 )
 
 // A generic RSA-based encrypter/verifier

@@ -2,10 +2,11 @@ package jose
 
 import (
 	"crypto/elliptic"
-	"crypto/x509"
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/crypto/sm2"
+	"github.com/gobars/ocicrypt/crypto/x509"
 	"github.com/gobars/ocicrypt/keywrap/jwe/jose/json"
 )
 
@@ -482,6 +483,8 @@ func curveName(crv elliptic.Curve) (string, error) {
 		return "P-384", nil
 	case elliptic.P521():
 		return "P-521", nil
+	case sm2.P256Sm2():
+		return "S-256", nil
 	default:
 		return "", fmt.Errorf("go-jose/go-jose: unsupported/unknown elliptic curve")
 	}

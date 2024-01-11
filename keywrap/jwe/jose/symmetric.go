@@ -140,7 +140,6 @@ func getContentCipher(alg ContentEncryption) contentCipher {
 		return newSM4GCM(16)
 	case S128CBC_SM3128:
 		return newSM4CBC(16)
-
 	default:
 		return nil
 	}

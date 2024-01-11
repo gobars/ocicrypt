@@ -6,9 +6,9 @@ import (
 	"crypto/ed25519"
 	"crypto/rsa"
 	"encoding/base64"
-	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/gobars/ocicrypt/keywrap/jwe/jose/json"
 )
 
 // NonceSource represents a source of random nonces to go into JWS objects

@@ -3,9 +3,8 @@ package jose
 import (
 	"encoding/base64"
 	"fmt"
+	"github.com/gobars/ocicrypt/keywrap/jwe/jose/json"
 	"strings"
-
-	"github.com/go-jose/go-jose/v3/json"
 )
 
 // rawJSONWebEncryption represents a raw JWE JSON object. Used for parsing/serializing.
