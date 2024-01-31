@@ -74,6 +74,13 @@ func marshalECDHPrivateKey(key *ecdh.PrivateKey) ([]byte, error) {
 	})
 }
 
+type sm2PrivateKey struct {
+	Version       int
+	PrivateKey    []byte
+	NamedCurveOID asn1.ObjectIdentifier `asn1:"optional,explicit,tag:0"`
+	PublicKey     asn1.BitString        `asn1:"optional,explicit,tag:1"`
+}
+
 // parseECPrivateKey parses an ASN.1 Elliptic Curve Private Key Structure.
 // The OID for the named curve may be provided from another source (such as
 // the PKCS8 container) - if it is provided then use this instead of the OID
@@ -81,12 +88,18 @@ func marshalECDHPrivateKey(key *ecdh.PrivateKey) ([]byte, error) {
 func parseECPrivateKey(namedCurveOID *asn1.ObjectIdentifier, der []byte) (key any, err error) {
 	var privKey ecPrivateKey
 	if _, err := asn1.Unmarshal(der, &privKey); err != nil {
-		if _, err := asn1.Unmarshal(der, &pkcs8{}); err == nil {
+		if _, err := asn1.Unmarshal(der, &pkcs8{}); err != nil {
 			return nil, errors.New("x509: failed to parse private key (use ParsePKCS8PrivateKey instead for this key format)")
 		}
-		if _, err := asn1.Unmarshal(der, &pkcs1PrivateKey{}); err == nil {
+
+		if _, err := asn1.Unmarshal(der, &privKey); err != nil {
+			return nil, errors.New("x509: failed to parse SM2 private key: " + err.Error())
+		}
+
+		if _, err := asn1.Unmarshal(der, &pkcs1PrivateKey{}); err != nil {
 			return nil, errors.New("x509: failed to parse private key (use ParsePKCS1PrivateKey instead for this key format)")
 		}
+
 		return nil, errors.New("x509: failed to parse EC private key: " + err.Error())
 	}
 	if privKey.Version != ecPrivKeyVersion {
